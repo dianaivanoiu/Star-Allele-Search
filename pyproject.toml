@@ -74,7 +74,7 @@ where = ["."]
 
 # Only include packages that match this pattern
 # (e.g. SeqKitSTP and any subpackages)
-include = ["Star-Alele-search*"]
+include = ["Star-Aleles-search*"]
 
 
 # ==========================================================
