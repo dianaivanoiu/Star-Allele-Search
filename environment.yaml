@@ -1,4 +1,4 @@
-name: start-allele-search
+name: Start-allele-search
 channels:
   - conda-forge
   - bioconda

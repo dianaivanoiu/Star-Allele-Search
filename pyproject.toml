@@ -20,7 +20,10 @@ version = "0.0.1"
 description = "Web application that displays Star information"
 
 # Authors of the package
-authors = [{name = "Diana Ivanoiu", "Liyamu Ma", "Sachin Kannangara"}]
+authors = [
+    {name = "Diana Ivanoiu"}, 
+    {name = "Liyamu Ma"}, 
+    {name = "Sachin Kannangara"}]
 
 # README file used as the long description (e.g. on PyPI)
 readme = "README.md"
