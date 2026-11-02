@@ -1,6 +1,7 @@
-name: hgnc_app_env
+name: start-allele-search
 channels:
-  - defaults
+  - conda-forge
+  - bioconda
 dependencies:
   - python=3.12
   - pip
