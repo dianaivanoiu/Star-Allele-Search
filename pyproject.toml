@@ -4,7 +4,7 @@
 [project]
 
 # The name of your package as it will appear on PyPI and in your installed packages
-name = "Star-allele-seach"
+name = "star_allele_search"
 
 # Fields that are NOT defined here but loaded dynamically elsewhere
 # In this case, dependencies are read from requirements.txt, and the code to do the reading from requirements.txt
@@ -77,7 +77,7 @@ where = ["."]
 
 # Only include packages that match this pattern
 # (e.g. SeqKitSTP and any subpackages)
-include = ["Star-Aleles-search*"]
+include = ["star_allele_search*"]
 
 
 # ==========================================================
@@ -101,7 +101,7 @@ include = ["Star-Aleles-search*"]
 # Do not remove or externalise these resources unless deployment
 # infrastructure explicitly guarantees correct resolution.
 [tool.setuptools.package-data]
-HGNCapp = [
+star_allele_search = [
     "templates/*",
     "static/*"
 ]

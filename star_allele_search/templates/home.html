@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <h1>Star Allele Search</h1>
+
+    <p class="welcome">Welcome!</p>
+
+    <form method="GET" action="">
+        <input type="text" name="search">
+        <button type="submit">
+            Search
+        </button>
+    </form>
+
+    {% if info %}   
+
+    <section>
+
+    {% for allele in info %}
+
+    <table>
+        <tr>
+            <th>Gene Symbol</th>
+            <td>{{ allele.geneSymbol }}</td>
+        </tr>
+
+        <tr>
+            <th>Allele Name</th>
+            <td>{{ allele.alleleName }}</td>
+        </tr>
+
+        <tr>
+            <th>References</th>
+            <td>{% for publication in allele.references %}
+                {{ publication.citation }} {{ publication.url }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+
+
+        {% for variant in allele.variants %}
+            <tr>
+                <th>Impact</th>
+                <td>{{ variant.impact }}</td>
+            </tr>
+
+            <tr>
+                <th>HGVS</th>
+                <td>{{ variant.hgvs }}</td>
+            </tr>
+
+            <tr>
+                <th>Reference Sequence</th>
+                <td>{{ variant.referenceSequence }}</td>
+            </tr>
+        {% endfor %}
+    
+    </table>
+
+    {% endfor %}
+    </section>
+
+    {% elif query %}
+
+    <p>Please enter a valid gene symbol</p>
+
+    {% endif %}
+
+</body>
