@@ -1,7 +1,7 @@
 from unittest.mock import Mock, patch  # Tools for creating fake objects and mocking functions
 
 # Import the functions we want to test
-from App.pharmvar_json import (
+from App.star_allele_search.module.pharmvar_json import (
     get_pharmvar_json,
     filter_pharmvar_json,
 )
