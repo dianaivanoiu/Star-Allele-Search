@@ -2,6 +2,8 @@ name: Tests
 
 on:
   push:
+    - branches: 
+      - diana-build-json
   pull_request:
 
 jobs:
