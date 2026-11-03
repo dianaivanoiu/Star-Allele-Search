@@ -4,6 +4,7 @@ Query and filter PharmVar allele data.
 
 import json
 import requests
+from App.star_allele_search.module.vv_validation import validate_pharmvar_result
 
 BASE_URL = "https://www.pharmvar.org/api-service/alleles"
 
@@ -80,6 +81,8 @@ def main():
     allele = "CYP2C19*2"
 
     result = get_pharmvar_json(allele)
+
+    validate_pharmvar_result(result) #This function validates that the gene symbol is correct and that it is the mane-select transcript.
 
     with open("CYP2C19_2.json", "w", encoding="utf-8") as file:
         json.dump(result, file, indent=2)
