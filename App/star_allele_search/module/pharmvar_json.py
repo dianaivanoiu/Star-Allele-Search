@@ -4,7 +4,7 @@ Query and filter PharmVar allele data.
 
 import json
 import requests
-from App.star_allele_search.module.vv_validation import validate_pharmvar_result
+from .vv_validation import validate_pharmvar_result
 
 BASE_URL = "https://www.pharmvar.org/api-service/alleles"
 
