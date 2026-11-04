@@ -73,7 +73,7 @@ dependencies = {file = ["requirements.txt"]}
 
 # Where setuptools should look for Python packages
 # "." means the root directory
-where = ["."]
+where = ["App"]
 
 # Only include packages that match this pattern
 # (e.g. SeqKitSTP and any subpackages)

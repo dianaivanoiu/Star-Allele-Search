@@ -36,14 +36,28 @@
             <td>{{ allele.alleleName }}</td>
         </tr>
 
-        <tr>
-            <th>References</th>
-            <td>{% for publication in allele.references %}
-                {{ publication.citation }} {{ publication.url }}<br>
-                {% endfor %}
-            </td>
+          <tr>
+            <th>PharmVar ID</th>
+            <td>{{ allele.pvId }}</td>
         </tr>
 
+          <tr>
+            <th>Legacy Label</th>
+            <td>{{ allele.legacyLabel }}</td>
+        </tr>
+    
+        <tr>
+            <th>Allele Type</th>
+            <td>{{ allele.alleleType }}</td>
+        </tr>
+
+        <tr>
+            <th>HGNC ID</th>
+            <td>{% if hgnc_id %}
+                {{ hgnc_id }}
+                {% endif %}
+            </td>
+        </tr>
 
         {% for variant in allele.variants %}
             <tr>
@@ -57,9 +71,23 @@
             </tr>
 
             <tr>
+                <th>MANE Select Transcript</th>
+                <td>NM_000769.4:c.681G>A</td>
+            </tr>
+
+            <tr>
                 <th>Reference Sequence</th>
                 <td>{{ variant.referenceSequence }}</td>
             </tr>
+
+            <tr>
+                <th>References</th>
+                <td>{% for publication in allele.references %}
+                    {{ publication.citation }} {{ publication.url }}<br>
+                    {% endfor %}
+                </td>
+            </tr>
+
         {% endfor %}
     
     </table>
@@ -69,7 +97,7 @@
 
     {% elif query %}
 
-    <p>Please enter a valid gene symbol</p>
+    <p>{{ query }} is not a valid allele name</p>
 
     {% endif %}
 
