@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    - branches: 
+    branches: 
       - diana-build-json
   pull_request:
 
