@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     branches: 
-      - diana-build-json
+      - sprint-1
   pull_request:
 
 jobs:
