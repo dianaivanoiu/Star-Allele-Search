@@ -33,12 +33,6 @@ def validate_pharmvar_result(pharmvar_result):
 
     for allele in pharmvar_result:
 
-        gene_symbol = allele["geneSymbol"]
-        allele_name = allele["alleleName"]
-
-        print(f"\nAllele: {allele_name}")
-        print("=" * 80)
-
         for variant in allele["variants"]: #Loop though the variant dictionary and extract genomic hgvs to use in url.
 
             genomic_hgvs = variant["hgvs"].replace("&amp;gt;", "&gt;")
@@ -56,42 +50,42 @@ def validate_pharmvar_result(pharmvar_result):
             response.raise_for_status()
 
             vv_result = response.json()
-            #print(vv_result)
+            return vv_result
 
-            transcript_key = next(
-                key
-                for key in vv_result
-                if key.startswith("NM_")
-            )
+            # transcript_key = next(
+            #     key
+            #     for key in vv_result
+            #     if key.startswith("NM_")
+            # )
 
-            transcript_data = vv_result[transcript_key]
+            # transcript_data = vv_result[transcript_key]
 
-            vv_gene = transcript_data["gene_symbol"]
+            # vv_gene = transcript_data["gene_symbol"]
 
-            # Development output used to confirm that the variant matches to the expected gene and transcript.
-            print(f"Variant              : {genomic_hgvs}")
-            print(f"PharmVar Gene        : {gene_symbol}")
-            print(f"VariantValidator Gene: {vv_gene}")
-            print(f"Gene Match           : {gene_symbol == vv_gene}")
+            # # Development output used to confirm that the variant matches to the expected gene and transcript.
+            # print(f"Variant              : {genomic_hgvs}")
+            # print(f"PharmVar Gene        : {gene_symbol}")
+            # print(f"VariantValidator Gene: {vv_gene}")
+            # print(f"Gene Match           : {gene_symbol == vv_gene}")
 
-            print(
-                f"Transcript           : "
-                f"{transcript_data['hgvs_transcript_variant']}"
-            )
+            # print(
+            #     f"Transcript           : "
+            #     f"{transcript_data['hgvs_transcript_variant']}"
+            # )
 
-            print(
-                f"MANE Select          : "
-                f"{transcript_data['annotations']['mane_select']}"
-            )
+            # print(
+            #     f"MANE Select          : "
+            #     f"{transcript_data['annotations']['mane_select']}"
+            # )
 
-            print(
-                f"RefSeq Select        : "
-                f"{transcript_data['annotations']['refseq_select']}"
-            )
+            # print(
+            #     f"RefSeq Select        : "
+            #     f"{transcript_data['annotations']['refseq_select']}"
+            # )
 
-            print(
-                f"Protein Consequence  : "
-                f"{transcript_data['hgvs_predicted_protein_consequence']['tlr']}"
-            )
+            # print(
+            #     f"Protein Consequence  : "
+            #     f"{transcript_data['hgvs_predicted_protein_consequence']['tlr']}"
+            # )
 
-            print("-" * 80)
+            # print("-" * 80)
