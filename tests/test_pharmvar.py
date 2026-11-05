@@ -1,7 +1,7 @@
 from unittest.mock import Mock, patch  # Tools for creating fake objects and mocking functions
 
 # Import the functions we want to test
-from App.star_allele_search.module.pharmvar_json import (
+from star_allele_search.module.pharmvar_json import (
     get_pharmvar_json,
     filter_pharmvar_json,
 )
@@ -12,7 +12,7 @@ from App.star_allele_search.module.pharmvar_json import (
 
 
 # Replace requests.get() in App.pharmvar_json with a mock object
-@patch("App.star_allele_search.module.pharmvar_json.requests.get")
+@patch("star_allele_search.module.pharmvar_json.requests.get")
 def test_get_pharmvar_json(mock_get):
     """
     Test that get_pharmvar_json returns the JSON data
@@ -45,7 +45,7 @@ def test_get_pharmvar_json(mock_get):
     assert result == expected_json
 
 
-@patch("App.star_allele_search.module.pharmvar_json.requests.get")
+@patch("star_allele_search.module.pharmvar_json.requests.get")
 def test_get_pharmvar_json_uses_correct_url(mock_get):
     """
     Test that the correct PharmVar URL is constructed.
@@ -81,7 +81,7 @@ def test_get_pharmvar_json_uses_correct_url(mock_get):
     )
 
 
-@patch("App.star_allele_search.module.pharmvar_json.requests.get")
+@patch("star_allele_search.module.pharmvar_json.requests.get")
 def test_get_pharmvar_json_called_with_correct_parameters(mock_get):
     """
     Test that the correct URL, headers, params and timeout
