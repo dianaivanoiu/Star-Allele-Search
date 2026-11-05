@@ -73,11 +73,11 @@ dependencies = {file = ["requirements.txt"]}
 
 # Where setuptools should look for Python packages
 # "." means the root directory
-where = ["."]
+where = ["App"]
 
 # Only include packages that match this pattern
 # (e.g. SeqKitSTP and any subpackages)
-include = ["star_alleles_search*"]
+include = ["star_allele_search*"]
 
 
 # ==========================================================
@@ -101,7 +101,7 @@ include = ["star_alleles_search*"]
 # Do not remove or externalise these resources unless deployment
 # infrastructure explicitly guarantees correct resolution.
 [tool.setuptools.package-data]
-star_alleles_search = [
+star_allele_search = [
     "templates/*",
     "static/*"
 ]
