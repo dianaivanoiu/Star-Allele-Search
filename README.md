@@ -32,3 +32,9 @@ conda activate Star-allele-search
 
 ```bash
 pip install -e .
+
+### 5. To load the webapp, run:
+
+```python
+python App/manage.py runserver
+```
