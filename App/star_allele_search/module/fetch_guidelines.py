@@ -1,74 +1,31 @@
 #!/usr/bin/env python3
 """
-Build a guideline catalogue from a ClinPGx JSON file containing
-relatedGuidelines references.
+fetch_guidelines.py
 
-For each related GuidelineAnnotation ID:
-    1. Retrieve the guideline from ClinPGx.
-    2. Extract summaryMarkdown.
-    3. Extract textMarkdown.
-    4. Extract all hyperlinks from both sections.
-    5. Save everything into a single JSON file.
+Build a guideline catalogue from a ClinPGx gene-search response.
+
+Workflow
+--------
+1. Receive a ClinPGx JSON response object.
+2. Iterate through every accession in the response.
+3. Extract all related GuidelineAnnotation IDs.
+4. Retrieve each GuidelineAnnotation from ClinPGx.
+5. Extract:
+    - summaryMarkdown
+    - textMarkdown
+    - hyperlinks contained in the HTML
+6. Group guidelines under their originating accession.
+7. Return a JSON-serialisable dictionary.
+
 """
 
-import json
 import requests
+from functools import lru_cache
 from bs4 import BeautifulSoup
 
 BASE_URL = "https://api.clinpgx.org/v1"
 
-
-def collect_guideline_ids(data):
-    """
-    Extract all unique GuidelineAnnotation IDs from the input JSON.
-
-    Returns
-    -------
-    dict
-        Mapping of:
-            guideline_id -> guideline_name
-    """
-
-    guideline_map = {}
-
-    for record in data["data"]:
-
-        for guideline in record.get(
-            "relatedGuidelines",
-            []
-        ):
-
-            guideline_map[
-                guideline["id"]
-            ] = guideline["name"]
-
-    return guideline_map
-
-
-def get_guideline(guideline_id):
-    """
-    Fetch a ClinPGx GuidelineAnnotation object.
-
-    Parameters
-    ----------
-    guideline_id : str
-
-    Returns
-    -------
-    dict
-        GuidelineAnnotation record.
-    """
-
-    response = requests.get(
-        f"{BASE_URL}/data/guidelineAnnotation/{guideline_id}",
-        timeout=30,
-    )
-
-    response.raise_for_status()
-
-    return response.json()["data"]
-
-
+@lru_cache()
 def extract_links(html):
     """
     Extract hyperlinks from HTML.
@@ -80,13 +37,15 @@ def extract_links(html):
     Returns
     -------
     list[dict]
-        Example:
-        [
-            {
-                "text": "2022 supplement",
-                "url": "https://..."
-            }
-        ]
+
+    Example
+    -------
+    [
+        {
+            "text": "2022 supplement",
+            "url": "https://..."
+        }
+    ]
     """
 
     soup = BeautifulSoup(
@@ -112,157 +71,172 @@ def extract_links(html):
 
     return links
 
-
-def build_guideline_catalog(
-    input_file,
-    output_file,
+@lru_cache()
+def get_guideline(
+    guideline_id,
 ):
     """
-    Build a local catalogue of guideline annotations.
+    Retrieve a ClinPGx GuidelineAnnotation.
 
     Parameters
     ----------
-    input_file : str
-        JSON file containing
-        relatedGuidelines entries.
+    guideline_id : str
 
-    output_file : str
-        Output JSON filename.
+    Returns
+    -------
+    dict
+        GuidelineAnnotation JSON.
     """
 
-    with open(
-        input_file,
-        encoding="utf-8",
-    ) as fh:
-
-        phenotype_data = json.load(
-            fh
-        )
-
-    guideline_map = (
-        collect_guideline_ids(
-            phenotype_data
-        )
+    response = requests.get(
+        f"{BASE_URL}/data/guidelineAnnotation/{guideline_id}",
+        timeout=30,
     )
+
+    response.raise_for_status()
+
+    return response.json()["data"]
+
+def build_guideline_catalog(
+    clinpgx_response,
+):
+    """
+    Build a guideline catalogue grouped
+    by accession.
+
+    Parameters
+    ----------
+    clinpgx_response : dict
+        JSON response supplied by the
+        ClinPGx gene/allele search function.
+
+    Returns
+    -------
+    dict
+        JSON-serialisable structure
+        grouped by accession.
+    """
 
     results = {
-        "guidelines": []
+        "accessions": []
     }
 
-    for (
-        guideline_id,
-        guideline_name,
-    ) in sorted(
-        guideline_map.items()
+    for record in clinpgx_response.get(
+        "data",
+        []
     ):
 
-        print(
-            f"Fetching "
-            f"{guideline_id}"
+        accession_id = record.get(
+            "accessionId"
         )
 
-        try:
+        accession_result = {
+            "accessionId": accession_id,
+            "guidelines": [],
+        }
 
-            guideline = (
-                get_guideline(
-                    guideline_id
+        for guideline_ref in record.get(
+            "relatedGuidelines",
+            []
+        ):
+
+            guideline_id = (
+                guideline_ref["id"]
+            )
+
+            guideline_name = (
+                guideline_ref["name"]
+            )
+
+            print(
+                f"Fetching "
+                f"{guideline_id}"
+            )
+
+            try:
+
+                guideline = (
+                    get_guideline(
+                        guideline_id
+                    )
                 )
-            )
 
-            summary = guideline.get(
-                "summaryMarkdown",
-                {},
-            )
-
-            text = guideline.get(
-                "textMarkdown",
-                {},
-            )
-
-            summary_html = (
-                summary.get(
-                    "html",
-                    ""
+                summary = guideline.get(
+                    "summaryMarkdown",
+                    {},
                 )
-            )
 
-            text_html = (
-                text.get(
-                    "html",
-                    ""
+                text = guideline.get(
+                    "textMarkdown",
+                    {},
                 )
-            )
 
-            links = (
-                extract_links(
-                    summary_html
+                summary_html = (
+                    summary.get(
+                        "html",
+                        ""
+                    )
                 )
-                +
-                extract_links(
-                    text_html
+
+                text_html = (
+                    text.get(
+                        "html",
+                        ""
+                    )
                 )
-            )
 
-            results[
-                "guidelines"
-            ].append(
-                {
-                    "id":
-                        guideline_id,
+                links = (
+                    extract_links(
+                        summary_html
+                    )
+                    +
+                    extract_links(
+                        text_html
+                    )
+                )
 
-                    "name":
-                        guideline_name,
+                accession_result[
+                    "guidelines"
+                ].append(
+                    {
+                        "id":
+                            guideline_id,
 
-                    "summaryMarkdown":
-                        summary,
+                        "name":
+                            guideline_name,
 
-                    "textMarkdown":
-                        text,
+                        "summaryMarkdown":
+                            summary,
 
-                    "links":
-                        links,
-                }
-            )
+                        "textMarkdown":
+                            text,
 
-        except Exception as exc:
+                        "links":
+                            links,
+                    }
+                )
 
-            results[
-                "guidelines"
-            ].append(
-                {
-                    "id":
-                        guideline_id,
+            except Exception as exc:
 
-                    "name":
-                        guideline_name,
+                accession_result[
+                    "guidelines"
+                ].append(
+                    {
+                        "id":
+                            guideline_id,
 
-                    "error":
-                        str(exc),
-                }
-            )
+                        "name":
+                            guideline_name,
 
-    with open(
-        output_file,
-        "w",
-        encoding="utf-8",
-    ) as fh:
+                        "error":
+                            str(exc),
+                    }
+                )
 
-        json.dump(
-            results,
-            fh,
-            indent=2,
-            ensure_ascii=False,
+        results[
+            "accessions"
+        ].append(
+            accession_result
         )
 
-    print(
-        f"Saved "
-        f"{output_file}"
-    )
-
-
-if __name__ == "__main__":
-
-    build_guideline_catalog(
-        input_file="accession_1 1.json",
-        output_file="guideline_catalog.json",
-    )
+    return results
