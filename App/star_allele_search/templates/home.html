@@ -7,93 +7,113 @@
 </head>
 
 <body>
+    <header class="page-header">
+        <h1>Star Allele Search</h1>
 
-    <h1>Star Allele Search</h1>
+        <form method="GET" action="">
+            <input type="text" name="search">
+            <button type="submit">
+                Search
+            </button>
+        </form>
+    </header>
 
-    <p class="welcome">Welcome!</p>
-
-    <form method="GET" action="">
-        <input type="text" name="search">
-        <button type="submit">
-            Search
-        </button>
-    </form>
+    <div class="banner">
+        {% for allele in info %}
+            {{ allele.alleleName}}
+        {% endfor %}
+    </div>
 
     {% if info %}   
 
-    <section>
+    <!--Splitting up the website into two columns-->
+    <div class="columns">
 
-    {% for allele in info %}
+        <!--Star Allele information on the left of the website-->
+        <section class="star_allele_info">
 
-    <table>
-        <tr>
-            <th>Gene Symbol</th>
-            <td>{{ allele.geneSymbol }}</td>
-        </tr>
+        {% for allele in info %}
 
-        <tr>
-            <th>Allele Name</th>
-            <td>{{ allele.alleleName }}</td>
-        </tr>
-
-          <tr>
-            <th>PharmVar ID</th>
-            <td>{{ allele.pvId }}</td>
-        </tr>
-
-          <tr>
-            <th>Legacy Label</th>
-            <td>{{ allele.legacyLabel }}</td>
-        </tr>
-    
-        <tr>
-            <th>Allele Type</th>
-            <td>{{ allele.alleleType }}</td>
-        </tr>
-
-        <tr>
-            <th>HGNC ID</th>
-            <td>{% if hgnc_id %}
-                {{ hgnc_id }}
-                {% endif %}
-            </td>
-        </tr>
-
-        {% for variant in allele.variants %}
+        <table>
             <tr>
-                <th>Impact</th>
-                <td>{{ variant.impact }}</td>
+                <th>Gene Symbol</th>
+                <td>{{ allele.geneSymbol }}</td>
             </tr>
 
             <tr>
-                <th>HGVS</th>
-                <td>{{ variant.hgvs }}</td>
+                <th>Allele Name</th>
+                <td>{{ allele.alleleName }}</td>
             </tr>
 
             <tr>
-                <th>MANE Select Transcript</th>
-                <td>NM_000769.4:c.681G>A</td>
+                <th>PharmVar ID</th>
+                <td>{{ allele.pvId }}</td>
             </tr>
 
             <tr>
-                <th>Reference Sequence</th>
-                <td>{{ variant.referenceSequence }}</td>
-            </tr>
-
-            <tr>
-                <th>References</th>
-                <td>{% for publication in allele.references %}
-                    {{ publication.citation }} {{ publication.url }}<br>
-                    {% endfor %}
+                <th>HGNC ID
+                <span class="info" tabindex="0" data-tip="Information retrieved from HGNC">ⓘ</span>
+                </th>
+                <td>{% if hgnc_id %}
+                    {{ hgnc_id }}
+                    {% endif %}
                 </td>
             </tr>
 
-        {% endfor %}
-    
-    </table>
+            <tr>
+                <th>MANE Select Transcript
+                <span class="info" tabindex="0" data-tip="Information retrieved from VariantValidator">ⓘ</span></th>
+                    <td>{{ transcript }}</td>
+            </tr>
 
-    {% endfor %}
-    </section>
+            {% for variant in allele.variants %}
+
+                <tr>
+                    <th>HGVS</th>
+                    <td>{{ variant.hgvs }}</td>
+                </tr>
+
+                <tr>
+                    <th>References</th>
+                    <td>{% for publication in allele.references %}
+                        {{ publication.citation }} <a href="{{ publication.url }}">{{ publication.url }}</a><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+
+            {% endfor %} 
+        </table>
+        {% endfor %}
+        </section>
+
+        <!--Drug information on the right of the website-->       
+        <section class="drug_info">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Drug</th>
+                    <th>Variant</th>
+                    <th>Literature</th>
+                    <th>Phenotype Categories</th>
+                </tr>
+            </thead>
+    <!--To include table information
+            <tbody>
+                {% for drug in drugs %}
+                <tr>
+                    <td>{{ drug.name }}</td>
+                    <td>{{ drug.variant }}</td>
+                    <td>{{ drug.literature }}</td>
+                    <td>{{ drug.phenotype }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        --->To include table information
+        </section>
+
+    </div>
 
     {% elif query %}
 
