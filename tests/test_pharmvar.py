@@ -2,9 +2,13 @@ import pytest
 import os
 from unittest.mock import Mock, patch
 
+<<<<<<< HEAD
 # Provide a test API key before importing the module
 os.environ["PHARMVAR_API_KEY"] = "test_api_key"
 
+=======
+# Import the functions we want to test
+>>>>>>> origin/sprint-2
 from star_allele_search.module.pharmvar_json import (
     get_pharmvar_json,
     filter_pharmvar_json,
@@ -18,6 +22,10 @@ from star_allele_search.module.pharmvar_json import (
 ###############################################################################
 
 
+<<<<<<< HEAD
+=======
+# Replace requests.get() in App.pharmvar_json with a mock object
+>>>>>>> origin/sprint-2
 @patch("star_allele_search.module.pharmvar_json.requests.get")
 def test_get_pharmvar_json(mock_get):
     """
