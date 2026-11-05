@@ -93,24 +93,38 @@
             <thead>
                 <tr>
                     <th>Drug</th>
-                    <th>Variant</th>
-                    <th>Literature</th>
-                    <th>Phenotype Categories</th>
+                    <th>Association</th>
+                    <th>Related Guidelines</th>
                 </tr>
             </thead>
-    <!--To include table information
+  
             <tbody>
-                {% for drug in drugs %}
                 <tr>
-                    <td>{{ drug.name }}</td>
-                    <td>{{ drug.variant }}</td>
-                    <td>{{ drug.literature }}</td>
-                    <td>{{ drug.phenotype }}</td>
+                    <td>Clopidogrel</td>
+                    <td>The CYP2C19*2 allele is assigned as a no function allele by CPIC. 
+                        Patients carrying the CYP2C19*2 allele in combination with a no, decreased, 
+                        normal, or increased function allele who are treated with clopidogrel may 
+                        have decreased platelet inhibition and increased residual platelet aggregation
+                         as compared to patients with two normal function alleles. However, conflicting
+                          evidence has been reported. Other genetic and clinical factors may also influence
+                           platelet inhibition.</td>
+                    <td>
+                        <ol>Avoid clopidogrel use in patients who are CYP2C19 poor metabolizers and are undergoing 
+                            percutaneous coronary intervention, stroke or TIA. For CYP2C19 intermediate metabolizers
+                             who are undergoing percutaneous coronary intervention, stroke, or TIA, choose an alternative
+                              drug or double the dose to 150 mg/day (600 mg loading dose). No action is required for 
+                              patients who are CYP2C19 ultra-rapid metabolizers.<a href="This is a link">This is a link</a></ol>
+                        <ol>This is guideline 2<a href="Link to something">This is a link</a></ol>
+                    </td>
+
+                    <td>
+
+                    </td>
+
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
-        --->To include table information
+
         </section>
 
     </div>
