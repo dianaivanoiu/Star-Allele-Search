@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     branches:
-      - sprint-2
+      - sprint-3
   pull_request:
 
 jobs:
