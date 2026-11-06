@@ -1,16 +1,23 @@
 """
 Query and filter PharmVar allele data.
 """
-
+import os
 import json
 import requests
 from .vv_validation import validate_pharmvar_result
+from .fetch_guidelines import build_guideline_catalog
+from .clinpgx_summary_annotation import get_filtered_annotations
+from functools import lru_cache
+from dotenv import load_dotenv
+load_dotenv()
 
 BASE_URL = "https://www.pharmvar.org/api-service/alleles"
 
 HEADERS = {
     "accept": "application/json",
-    "Api-Key": "e1779867df584c4e9bcca87bcf3a61b3",
+    "Api-Key": os.getenv(
+        "PHARMVAR_API_KEY"
+    ),
 }
 
 PARAMS = {
@@ -21,7 +28,7 @@ PARAMS = {
     "include-retired-reference-sequences": "false",
 }
 
-
+@lru_cache()
 def get_pharmvar_json(allele):
     """
     Query PharmVar and return JSON for a star allele.
@@ -83,6 +90,17 @@ def main():
     result = get_pharmvar_json(allele)
 
     validate_pharmvar_result(result) #This function validates that the gene symbol is correct and that it is the mane-select transcript.
+
+    clinpgx_response = (get_filtered_annotations(allele))
+
+    guideline_catalog = build_guideline_catalog(clinpgx_response)
+
+    with open("guidelines.json", "w", encoding="utf-8") as file: #Add temporarily here in dev, Liyamu can use guideline_catalogue variable
+        json.dump(
+        guideline_catalog,
+        file,
+        indent=2
+        )
 
     with open("CYP2C19_2.json", "w", encoding="utf-8") as file:
         json.dump(result, file, indent=2)

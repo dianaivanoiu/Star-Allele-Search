@@ -1,0 +1,182 @@
+/*
+ * AI Declaration
+ * Tool: Claude Sonnet 5.5 (Anthropic)
+ * Use: Generated the initial structure and styling for this stylesheet
+ *      (colour scheme, layout, table styling) based on the structure of
+ *      home.html. Reviewed and adapted by Mariam.
+ * Date: 5 November 2026
+ */
+
+:root {
+    --primary: #0f6e7c;       /* calm clinical teal */
+    --primary-light: #e6f2f4;
+    --text: #1f2933;
+    --muted: #5f6c7b;
+    --border: #d9e2e8;
+    --bg: #f7fafb;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.5;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem;
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.welcome {
+    margin: 0.25rem 0 1rem;
+    color: var(--muted);
+}
+
+.page-header input[type="text"] {
+    width: 260px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.page-header input[type="text"]:focus {
+    outline: 2px solid var(--primary);
+    border-color: transparent;
+}
+
+.page-header button {
+    padding: 0.5rem 1.1rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.page-header button:hover {
+    background: #0b5864;
+}
+
+/* Banner */
+.banner {
+    background: var(--primary-light);
+    color: var(--primary);
+    text-align: center;
+    padding: 0.6rem;
+    font-size: 3rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Two columns */
+.columns {
+    display: flex;
+    gap: 1.5rem;
+    height: 70vh;
+    padding: 1.5rem;
+}
+
+.star_allele_info,
+.drug_info {
+    flex: 1;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+th, td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+/* Left column: label/value rows */
+.star_allele_info th {
+    width: 35%;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+/* Right column: header row with sticky headings */
+.drug_info thead th {
+    position: sticky;
+    top: 0;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+.drug_info tbody tr:nth-child(even) {
+    background: var(--bg);
+}
+
+.drug_info tbody tr:hover {
+    background: var(--primary-light);
+}
+
+/* Error message */
+.error {
+    text-align: center;
+    color: #b42318;
+    margin-top: 2rem;
+}
+
+a {
+    color: #0f6e7c;
+    text-decoration: none;
+}
+
+.info {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.3rem;
+    color: var(--primary);
+    font-size: 0.85rem;
+    cursor: help;
+}
+
+.info::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: 130%;
+    left: 0;
+    width: max-content;
+    max-width: 220px;
+    padding: 0.4rem 0.6rem;
+    background: var(--text);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: normal;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.info:hover::after,
+.info:focus::after {
+    opacity: 1;
+}

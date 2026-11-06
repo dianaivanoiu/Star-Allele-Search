@@ -7,93 +7,127 @@
 </head>
 
 <body>
+    <header class="page-header">
+        <h1>Star Allele Search</h1>
 
-    <h1>Star Allele Search</h1>
+        <form method="GET" action="">
+            <input type="text" name="search">
+            <button type="submit">
+                Search
+            </button>
+        </form>
+    </header>
 
-    <p class="welcome">Welcome!</p>
-
-    <form method="GET" action="">
-        <input type="text" name="search">
-        <button type="submit">
-            Search
-        </button>
-    </form>
+    <div class="banner">
+        {% for allele in info %}
+            {{ allele.alleleName}}
+        {% endfor %}
+    </div>
 
     {% if info %}   
 
-    <section>
+    <!--Splitting up the website into two columns-->
+    <div class="columns">
 
-    {% for allele in info %}
+        <!--Star Allele information on the left of the website-->
+        <section class="star_allele_info">
 
-    <table>
-        <tr>
-            <th>Gene Symbol</th>
-            <td>{{ allele.geneSymbol }}</td>
-        </tr>
+        {% for allele in info %}
 
-        <tr>
-            <th>Allele Name</th>
-            <td>{{ allele.alleleName }}</td>
-        </tr>
-
-          <tr>
-            <th>PharmVar ID</th>
-            <td>{{ allele.pvId }}</td>
-        </tr>
-
-          <tr>
-            <th>Legacy Label</th>
-            <td>{{ allele.legacyLabel }}</td>
-        </tr>
-    
-        <tr>
-            <th>Allele Type</th>
-            <td>{{ allele.alleleType }}</td>
-        </tr>
-
-        <tr>
-            <th>HGNC ID</th>
-            <td>{% if hgnc_id %}
-                {{ hgnc_id }}
-                {% endif %}
-            </td>
-        </tr>
-
-        {% for variant in allele.variants %}
+        <table>
             <tr>
-                <th>Impact</th>
-                <td>{{ variant.impact }}</td>
+                <th>Gene Symbol</th>
+                <td>{{ allele.geneSymbol }}</td>
             </tr>
 
             <tr>
-                <th>HGVS</th>
-                <td>{{ variant.hgvs }}</td>
+                <th>Allele Name</th>
+                <td>{{ allele.alleleName }}</td>
             </tr>
 
             <tr>
-                <th>MANE Select Transcript</th>
-                <td>NM_000769.4:c.681G>A</td>
+                <th>PharmVar ID</th>
+                <td>{{ allele.pvId }}</td>
             </tr>
 
             <tr>
-                <th>Reference Sequence</th>
-                <td>{{ variant.referenceSequence }}</td>
-            </tr>
-
-            <tr>
-                <th>References</th>
-                <td>{% for publication in allele.references %}
-                    {{ publication.citation }} {{ publication.url }}<br>
-                    {% endfor %}
+                <th>HGNC ID
+                <span class="info" tabindex="0" data-tip="Information retrieved from HGNC">ⓘ</span>
+                </th>
+                <td>{% if hgnc_id %}
+                    {{ hgnc_id }}
+                    {% endif %}
                 </td>
             </tr>
 
-        {% endfor %}
-    
-    </table>
+            <tr>
+                <th>MANE Select Transcript
+                <span class="info" tabindex="0" data-tip="Information retrieved from VariantValidator">ⓘ</span></th>
+                    <td>{{ transcript }}</td>
+            </tr>
 
-    {% endfor %}
-    </section>
+            {% for variant in allele.variants %}
+
+                <tr>
+                    <th>HGVS</th>
+                    <td>{{ variant.hgvs }}</td>
+                </tr>
+
+                <tr>
+                    <th>References</th>
+                    <td>{% for publication in allele.references %}
+                        {{ publication.citation }} <a href="{{ publication.url }}">{{ publication.url }}</a><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+
+            {% endfor %} 
+        </table>
+        {% endfor %}
+        </section>
+
+        <!--Drug information on the right of the website-->       
+        <section class="drug_info">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Drug</th>
+                    <th>Association</th>
+                    <th>Related Guidelines</th>
+                </tr>
+            </thead>
+  
+            <tbody>
+                <tr>
+                    <td>Clopidogrel</td>
+                    <td>The CYP2C19*2 allele is assigned as a no function allele by CPIC. 
+                        Patients carrying the CYP2C19*2 allele in combination with a no, decreased, 
+                        normal, or increased function allele who are treated with clopidogrel may 
+                        have decreased platelet inhibition and increased residual platelet aggregation
+                         as compared to patients with two normal function alleles. However, conflicting
+                          evidence has been reported. Other genetic and clinical factors may also influence
+                           platelet inhibition.</td>
+                    <td>
+                        <ol>Avoid clopidogrel use in patients who are CYP2C19 poor metabolizers and are undergoing 
+                            percutaneous coronary intervention, stroke or TIA. For CYP2C19 intermediate metabolizers
+                             who are undergoing percutaneous coronary intervention, stroke, or TIA, choose an alternative
+                              drug or double the dose to 150 mg/day (600 mg loading dose). No action is required for 
+                              patients who are CYP2C19 ultra-rapid metabolizers.<a href="This is a link">This is a link</a></ol>
+                        <ol>This is guideline 2<a href="Link to something">This is a link</a></ol>
+                    </td>
+
+                    <td>
+
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+        </section>
+
+    </div>
 
     {% elif query %}
 
