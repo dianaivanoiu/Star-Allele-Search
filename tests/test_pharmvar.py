@@ -1,5 +1,6 @@
-# Provide a test API key before importing the module
-os.environ["PHARMVAR_API_KEY"] = "test_api_key"
+import pytest
+import os
+from unittest.mock import Mock, patch
 
 from star_allele_search.module.pharmvar_json import (
     get_pharmvar_json,

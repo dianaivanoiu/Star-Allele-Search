@@ -1,5 +1,5 @@
 from unittest.mock import Mock, patch
-
+import pytest
 from star_allele_search.module.fetch_guidelines import (
     extract_links,
     get_guideline,
@@ -343,6 +343,7 @@ def test_build_guideline_catalog_error_handling(
         "error"
     ] == "API failure"
 
+@pytest.mark.integration
 def test_get_guideline_integration():
     """
     Integration test against the real ClinPGx API.
