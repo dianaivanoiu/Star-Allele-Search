@@ -1,0 +1,25 @@
+site_name: Star-Allele-Search
+site_description: Search and annotate pharmacogenomic star alleles
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+
+  - Local Installation: local_installation.md
+  - Docker Installation: docker_installation.md
+
+  - User Guide:
+        - User Guide: user-guide/index.md
+  - Technical manual:
+        - Technical Manual: technical-manual/index.md
+
+  - Testing:
+        - Testing: testing.md
+
+  - API Reference:
+        - API Reference: api-reference.md
+
+plugins:
+  - search
