@@ -4,7 +4,7 @@
 
 Star-Allele-Search is a pharmacogenomics application developed to retrieve, validate and annotate pharmacogenomic star allele information.
 
-The application integrates information from multiple external resources, including PharmVar and ClinPGx, to provide allele-specific information, phenotype annotations and clinical guideline recommendations.
+The application integrates information from multiple external resources, including PharmVar, ClinPGx, HGNC and VariantValidator, to provide allele-specific information, phenotype annotations and clinical guideline recommendations.
 
 ---
 
@@ -18,20 +18,29 @@ User Input
      ▼
  Star Allele Search
      │
- ┌───┴─────────┐
- │             │
- ▼             ▼
-PharmVar      HGNC
-Lookup      Validation
- │             │
- └─────┬───────┘
-       ▼
-Phenotype Processing
-       ▼
-Guideline Retrieval
-       ▼
-Results
+ ┌───┼────────────────────┐
+ │   │                    │
+ ▼   ▼                    ▼
+HGNC Validation   PharmVar Retrieval
+ │                     │
+ └────────┬────────────┘
+          ▼
+ ClinPGx Annotation Retrieval
+          │
+          ▼
+ Guideline Processing
+          │
+          ▼
+ Structured Results
 ```
+
+The application integrates with the following external resources:
+
+- PharmVar
+- ClinPGx
+- HGNC
+- VariantValidator
+- TerraCipher
 
 ---
 
@@ -40,38 +49,38 @@ Results
 ```text
 Star-Allele-Search
 │
-├── App
+├── App/
 │   ├── pharmvar_json.py
-│   ├── fetch_guidelines.py
-│   ├── clinpgx_summary_annotation.py
+│   ├── vv_validation.py
 │   ├── hgnc_id.py
-│   └── vv_validation.py
+│   ├── clinpgx_summary_annotation.py
+│   └── fetch_guidelines.py
 │
-├── tests
+├── tests/
 │
-├── docs
+├── sas-docs/
 │
 ├── environment.yaml
-├── pyproject.toml
 ├── requirements.txt
+├── pyproject.toml
 └── README.md
 ```
 
 ### App
 
-Contains application source code.
+Contains the application source code and integration modules.
 
 ### tests
 
-Contains automated unit tests and functional tests.
+Contains automated unit and integration tests.
 
-### docs
+### sas-docs
 
 Contains MkDocs documentation used to generate the project website.
 
 ### pyproject.toml
 
-Defines build and package configuration.
+Defines package metadata, build configuration and dependency management.
 
 ### environment.yaml
 
@@ -85,74 +94,237 @@ Defines the Conda environment used during development.
 
 Responsible for retrieving star allele information from the PharmVar API.
 
-Main responsibilities include:
+#### Key Functions
 
-- Connecting to PharmVar
-- Retrieving allele definitions
-- Parsing JSON responses
-- Formatting allele information
+- `get_pharmvar_json()`
+- `filter_pharmvar_json()`
 
-### fetch_guidelines.py
+#### Responsibilities
 
-Responsible for retrieving pharmacogenomic guideline information.
-
-Main responsibilities include:
-
-- Connecting to ClinPGx resources
-- Retrieving guideline annotations
-- Parsing recommendation data
-
-### clinpgx_summary_annotation.py
-
-Processes ClinPGx annotations and generates structured summaries.
-
-### hgnc_id.py
-
-Validates gene names using HGNC nomenclature.
-
-### vv_validation.py
-
-Performs validation checks on user input prior to processing.
+- Connect to the PharmVar API
+- Retrieve allele definitions
+- Process JSON responses
+- Generate simplified outputs
 
 ---
 
-## Testing
+### vv_validation.py
 
-Automated testing is implemented using PyTest.
+Responsible for variant validation using the VariantValidator REST API.
 
-Tests are stored in the repository test directory.
+#### Key Functions
 
-### Run Tests
+- `validate_pharmvar_result()`
+
+#### Responsibilities
+
+- Validate PharmVar variants
+- Retrieve MANE Select transcript representations
+- Verify variant nomenclature
+
+---
+
+### hgnc_id.py
+
+Responsible for HGNC gene symbol validation and HGNC identifier retrieval.
+
+#### Key Functions
+
+- `get_hgnc_json()`
+- `get_hgnc_id()`
+- `main_hgnc()`
+
+#### Responsibilities
+
+- Validate gene symbols
+- Retrieve HGNC identifiers
+- Standardise gene nomenclature
+
+---
+
+### clinpgx_summary_annotation.py
+
+Responsible for retrieving and filtering ClinPGx annotation information.
+
+#### Key Functions
+
+- `get_clinpgx_annotation_json()`
+- `get_filtered_annotations()`
+
+#### Responsibilities
+
+- Query ClinPGx
+- Filter annotation results
+- Identify relevant allele annotations
+
+---
+
+### fetch_guidelines.py
+
+Responsible for retrieving and organising ClinPGx guideline information.
+
+#### Key Functions
+
+- `extract_links()`
+- `get_guideline()`
+- `build_guideline_catalog()`
+
+#### Responsibilities
+
+- Retrieve guideline annotations
+- Extract references and hyperlinks
+- Build structured guideline catalogues
+
+---
+
+## Environment Management
+
+Star-Allele-Search uses Conda and pip to provide a reproducible development environment.
+
+### Create Environment
+
+```bash
+conda env create -f environment.yaml
+conda activate Star-allele-search
+```
+
+### Install Package
+
+```bash
+pip install .
+```
+
+Dependencies are managed using:
+
+- environment.yaml
+- requirements.txt
+- pyproject.toml
+
+---
+
+## Testing and Quality Assurance
+
+### Overview
+
+Star-Allele-Search uses automated testing to verify that application functionality behaves as expected and to reduce the risk of introducing regressions during development.
+
+Testing is performed using **PyTest** and is automatically executed through **GitHub Actions** whenever code is pushed to the repository or submitted in a pull request.
+
+---
+
+### Automated Testing
+
+The automated test suite verifies the behaviour of individual modules and application workflows.
+
+Tests can be executed locally using:
 
 ```bash
 pytest
 ```
 
-### Run Coverage
+![PyTest Results](../images/pytest_passing.png)
 
-```bash
-pytest --cov=App
-```
-
-Coverage reports are used to assess the effectiveness of the automated test suite.
-
-Both happy-path and exception handling behaviour are tested.    
+<small><em>Figure 1. Successful execution of the Star-Allele-Search test suite.</em></small>
 
 ---
 
-## Continuous Integration
+### Test Coverage
 
-GitHub Actions is used to automate project testing.
+Coverage analysis is performed using **pytest-cov** to measure how much of the source code is exercised by the automated tests.
 
-The workflow performs the following tasks:
+Coverage can be generated using:
 
-1. Creates a clean environment.
+```bash
+pytest --cov=App --cov-report=term-missing --cov-report=html -vv
+```
+
+The command generates a terminal summary and an HTML coverage report that can be inspected in a web browser.
+
+![Coverage Results](../images/pytest_terminal_output.png)
+
+<small><em>Figure 2. Coverage generation using pytest-cov.</em></small>
+
+#### Coverage Objectives
+
+The test suite is designed to cover:
+
+- PharmVar API integration
+- ClinPGx annotation retrieval
+- HGNC identifier retrieval
+- Guideline processing
+- Variant validation
+- Exception handling
+- Error conditions
+
+---
+
+### Types of Testing
+
+#### Unit Testing
+
+Unit tests validate individual functions in isolation to ensure that each software component behaves correctly.
+
+Examples include:
+
+- PharmVar data retrieval functions
+- HGNC lookup functions
+- Annotation filtering functions
+- Guideline catalogue generation
+
+#### Exception Testing
+
+Exception tests ensure that the software handles invalid data and external service failures appropriately.
+
+Examples include:
+
+- Invalid allele names
+- Network failures
+- Missing API credentials
+tinuous Integration
+
+Star-Allele-Search uses **GitHub Actions** for Continuous Integration (CI).
+
+Every push and pull request automatically triggers a workflow that:
+
+1. Creates a clean Python environment.
 2. Installs project dependencies.
 3. Executes the automated test suite.
-4. Generates coverage metrics.
-5. Reports build success or failure.
+4. Generates code coverage metrics.
+5. Uploads coverage reports to Codecov.
 
-Documentation is automatically deployed using GitHub Pages.
+This ensures that code changes are automatically validated before being merged into the project.
+
+../images/github_actions_passing.png
+
+<small><em>Figure 3. Successful GitHub Actions workflow showing automated testing and Codecov integration.</em></small>
+
+---
+
+### Quality Assurance Workflow
+
+```text
+Code Change
+      │
+      ▼
+GitHub Push / Pull Request
+      │
+      ▼
+GitHub Actions
+      │
+ ┌────┼────────────┐
+ │    │            │
+ ▼    ▼            ▼
+Install  Run Tests  Generate Coverage
+Dependencies
+      │
+      ▼
+Codecov Upload
+      │
+      ▼
+Pass / Fail Report
+```
+
+The Continuous Integration pipeline helps ensure that all code committed to the repository is automatically tested and validated.
 
 ---
 
@@ -160,14 +332,19 @@ Documentation is automatically deployed using GitHub Pages.
 
 Logging is used throughout the application to record operational events and errors.
 
-Log levels include:
+The following logging levels are used:
 
 - DEBUG
 - INFO
 - WARNING
 - ERROR
 
-Logs can be used to troubleshoot API failures and unexpected behaviour.
+Logging captures:
+
+- API requests
+- Processing steps
+- Validation failures
+- Unexpected exceptions
 
 ---
 
@@ -181,5 +358,20 @@ Examples include:
 - Network failures
 - API errors
 - JSON parsing failures
+- Missing API credentials
 
 Exceptions are logged to aid debugging and maintenance.
+
+---
+
+## Future Improvements
+
+Potential future enhancements include:
+
+- Additional PharmGKB integration
+- Expanded phenotype annotations
+- Enhanced guideline filtering
+- Result export functionality
+- Additional pharmacogene support
+- Improved search capabilities
+- Web application deployment

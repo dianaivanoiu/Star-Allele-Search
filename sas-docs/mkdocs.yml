@@ -9,17 +9,8 @@ nav:
 
   - Local Installation: local_installation.md
   - Docker Installation: docker_installation.md
-
-  - User Guide:
-        - User Guide: user-guide/index.md
-  - Technical manual:
-        - Technical Manual: technical-manual/index.md
-
-  - Testing:
-        - Testing: testing.md
-
-  - API Reference:
-        - API Reference: api-reference.md
+  - User Guide: user-guide/index.md
+  - Technical Manual: technical-manual/index.md
 
 plugins:
   - search

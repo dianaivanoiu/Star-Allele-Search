@@ -5,7 +5,7 @@
 Star-Allele-Search is a pharmacogenomics application that retrieves, validates and annotates star allele information from multiple external resources.
 
 ![Search page](../images/search_page.png)
-*Figure 1. Homepage*
+<small><em>Figure 1. Homepage</small></em>
 
 The application combines information from:
 
@@ -16,6 +16,27 @@ The application combines information from:
 
 to provide clinically relevant pharmacogenomic information.
 
+
+## Understanding Star Alleles and Diplotypes
+
+Pharmacogenomic results are often reported using star allele nomenclature.
+
+A diplotype consists of two star alleles inherited from the two parental chromosomes.
+
+For example:
+
+- Gene: CYP2C19
+- Allele 1: *17
+- Allele 2: *17
+- Diplotype: CYP2C19 *17/*17
+
+![Search Example](../images/star_allele_example_1.png)
+<small><em>Figure 2. Example star allele.</small></em>
+
+The figure below illustrates how a diplotype is represented.
+
+![Search Example](../images/star_allele_diplotype.png)
+<small><em>Figure 3. Example pharmacogenomic diplotype notation.</small></em>
 ---
 
 # Typical Workflow
@@ -57,7 +78,7 @@ User Input
 The following example shows a search for CYP2C19*2(UPDATE CLOSER TO SUBMISSION).
 
 ![Search Example](../images/search_result.png)
-*Figure 2. Example search for CYP2C19*2.*
+<small><em>Figure 4. Example search for CYP2C19*2.</em></small>
 ---
 
 # Searching for a Star Allele
