@@ -31,17 +31,20 @@ For example:
 - Diplotype: CYP2C19 *17/*17
 
 ![Search Example](../images/star_allele_example_1.png)
+
 <small><em>Figure 2. Example star allele.</small></em>
 
 The figure below illustrates how a diplotype is represented.
 
 ![Search Example](../images/star_allele_diplotype.png)
+
 <small><em>Figure 3. Example pharmacogenomic diplotype notation.</small></em>
+
 ---
 
 # Typical Workflow
 
-The user provides a star allele query.
+The user provides a star allele query in the search box and presses the search button.
 
 ```text
 CYP2C19*2
@@ -75,7 +78,7 @@ User Input
 ```
 ## Example Search
 
-The following example shows a search for CYP2C19*2(UPDATE CLOSER TO SUBMISSION).
+The following example shows a search for CYP2C19*2.
 
 ![Search Example](../images/search_result.png)
 <small><em>Figure 4. Example search for CYP2C19*2.</em></small>
@@ -91,7 +94,7 @@ CYP2C19*2
 
 The query should contain:
 
-- A valid gene name
+- A valid gene 
 - A valid star allele designation
 
 Example valid inputs:
@@ -114,25 +117,12 @@ The application may return several categories of information.
 Example:
 
 ```text
-Gene: CYP2C19
-Allele: *2
-Function: No Function
+Gene symbol: CYP2C19
+Allele Name: *2
+PharmVar ID: PV03110
 ```
 
 This information is retrieved from PharmVar.
-
----
-
-## Phenotype Information
-
-Example:
-
-```text
-Phenotype:
-Poor Metaboliser
-```
-
-Phenotype predictions are generated from available pharmacogenomic annotations.
 
 ---
 
