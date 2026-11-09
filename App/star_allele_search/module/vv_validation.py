@@ -1,7 +1,9 @@
 import os
 import requests
+from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv()
+
+load_dotenv(Path(__file__).resolve().parents[3] / ".env")
 
 ###############################################################################################################
 #                           AI use declaration                                                                #
@@ -93,4 +95,14 @@ def validate_pharmvar_result(pharmvar_result):
             response.raise_for_status()
 
             vv_result = response.json()
-            return vv_result
+            if not isinstance(vv_result, dict):
+                return {}
+
+            return {
+                key: value
+                for key, value in vv_result.items()
+                if isinstance(value, dict)
+                and "hgvs_transcript_variant" in value
+            }
+
+    return {}
