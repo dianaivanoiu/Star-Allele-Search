@@ -1,4 +1,8 @@
-# Star-Allele-Search-Web-Application
+# Star-Allele-Search
+
+[![Tests](https://github.com/dianaivanoiu/Star-Allele-Search/actions/workflows/tests.yml/badge.svg)](https://github.com/dianaivanoiu/Star-Allele-Search/actions/workflows/tests.yml)
+
+[![codecov](https://codecov.io/gh/dianaivanoiu/Star-Allele-Search/graph/badge.svg)](https://codecov.io/gh/dianaivanoiu/Star-Allele-Search)
 
 ---
 
