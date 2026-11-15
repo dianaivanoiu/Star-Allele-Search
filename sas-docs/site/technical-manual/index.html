@@ -1,0 +1,1746 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Search and annotate pharmacogenomic star alleles">
+      
+      
+      
+      
+        <link rel="prev" href="../user-guide/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Technical Manual - Star-Allele-Search</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#technical-manual" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Star-Allele-Search" class="md-header__button md-logo" aria-label="Star-Allele-Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Star-Allele-Search
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Technical Manual
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Star-Allele-Search" class="md-nav__button md-logo" aria-label="Star-Allele-Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Star-Allele-Search
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Manual
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Manual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Project Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sas-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sas-docs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pyproject.toml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environmentyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        environment.yaml
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pharmvar_jsonpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pharmvar_json.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pharmvar_json.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vv_validationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vv_validation.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="vv_validation.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hgnc_idpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hgnc_id.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="hgnc_id.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clinpgx_summary_annotationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clinpgx_summary_annotation.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="clinpgx_summary_annotation.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetch_guidelinespy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fetch_guidelines.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fetch_guidelines.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install Package
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-and-quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing and Quality Assurance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing and Quality Assurance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automated-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Coverage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Coverage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coverage-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage Objectives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types-of-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types of Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Types of Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exception Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Assurance Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exception-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exception Handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Improvements
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Project Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sas-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sas-docs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pyproject.toml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environmentyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        environment.yaml
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pharmvar_jsonpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pharmvar_json.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pharmvar_json.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vv_validationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vv_validation.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="vv_validation.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hgnc_idpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hgnc_id.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="hgnc_id.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clinpgx_summary_annotationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clinpgx_summary_annotation.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="clinpgx_summary_annotation.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetch_guidelinespy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fetch_guidelines.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="fetch_guidelines.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-functions_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#responsibilities_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install Package
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-and-quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing and Quality Assurance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing and Quality Assurance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automated-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Coverage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Coverage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coverage-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage Objectives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types-of-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types of Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Types of Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exception Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quality Assurance Workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exception-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exception Handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Improvements
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="technical-manual">Technical Manual</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Star-Allele-Search is a pharmacogenomics application developed to retrieve, validate and annotate pharmacogenomic star allele information.</p>
+<p>The application integrates information from multiple external resources, including PharmVar, ClinPGx, HGNC and VariantValidator, to provide allele-specific information, phenotype annotations and clinical guideline recommendations.</p>
+<hr />
+<h2 id="system-architecture">System Architecture</h2>
+<p>The software follows a modular architecture.</p>
+<pre><code class="language-text">User Input
+     │
+     ▼
+ Star Allele Search
+     │
+ ┌───┼────────────────────┐
+ │   │                    │
+ ▼   ▼                    ▼
+HGNC Validation   PharmVar Retrieval
+ │                     │
+ └────────┬────────────┘
+          ▼
+ ClinPGx Annotation Retrieval
+          │
+          ▼
+ Guideline Processing
+          │
+          ▼
+ Structured Results
+</code></pre>
+<p>The application integrates with the following external resources:</p>
+<ul>
+<li>PharmVar</li>
+<li>ClinPGx</li>
+<li>HGNC</li>
+<li>VariantValidator</li>
+<li>TerraCipher</li>
+</ul>
+<hr />
+<h2 id="project-structure">Project Structure</h2>
+<pre><code class="language-text">Star-Allele-Search
+│
+├── App/
+│   ├── pharmvar_json.py
+│   ├── vv_validation.py
+│   ├── hgnc_id.py
+│   ├── clinpgx_summary_annotation.py
+│   └── fetch_guidelines.py
+│
+├── tests/
+│
+├── sas-docs/
+│
+├── environment.yaml
+├── requirements.txt
+├── pyproject.toml
+└── README.md
+</code></pre>
+<h3 id="app">App</h3>
+<p>Contains the application source code and integration modules.</p>
+<h3 id="tests">tests</h3>
+<p>Contains automated unit and integration tests.</p>
+<h3 id="sas-docs">sas-docs</h3>
+<p>Contains MkDocs documentation used to generate the project website.</p>
+<h3 id="pyprojecttoml">pyproject.toml</h3>
+<p>Defines package metadata, build configuration and dependency management.</p>
+<h3 id="environmentyaml">environment.yaml</h3>
+<p>Defines the Conda environment used during development.</p>
+<hr />
+<h2 id="core-modules">Core Modules</h2>
+<h3 id="pharmvar_jsonpy">pharmvar_json.py</h3>
+<p>Responsible for retrieving star allele information from the PharmVar API.</p>
+<h4 id="key-functions">Key Functions</h4>
+<ul>
+<li><code>get_pharmvar_json()</code></li>
+<li><code>filter_pharmvar_json()</code></li>
+</ul>
+<h4 id="responsibilities">Responsibilities</h4>
+<ul>
+<li>Connect to the PharmVar API</li>
+<li>Retrieve allele definitions</li>
+<li>Process JSON responses</li>
+<li>Generate simplified outputs</li>
+</ul>
+<hr />
+<h3 id="vv_validationpy">vv_validation.py</h3>
+<p>Responsible for variant validation using the VariantValidator REST API.</p>
+<h4 id="key-functions_1">Key Functions</h4>
+<ul>
+<li><code>validate_pharmvar_result()</code></li>
+</ul>
+<h4 id="responsibilities_1">Responsibilities</h4>
+<ul>
+<li>Validate PharmVar variants</li>
+<li>Retrieve MANE Select transcript representations</li>
+<li>Verify variant nomenclature</li>
+</ul>
+<hr />
+<h3 id="hgnc_idpy">hgnc_id.py</h3>
+<p>Responsible for HGNC gene symbol validation and HGNC identifier retrieval.</p>
+<h4 id="key-functions_2">Key Functions</h4>
+<ul>
+<li><code>get_hgnc_json()</code></li>
+<li><code>get_hgnc_id()</code></li>
+<li><code>main_hgnc()</code></li>
+</ul>
+<h4 id="responsibilities_2">Responsibilities</h4>
+<ul>
+<li>Validate gene symbols</li>
+<li>Retrieve HGNC identifiers</li>
+<li>Standardise gene nomenclature</li>
+</ul>
+<hr />
+<h3 id="clinpgx_summary_annotationpy">clinpgx_summary_annotation.py</h3>
+<p>Responsible for retrieving and filtering ClinPGx annotation information.</p>
+<h4 id="key-functions_3">Key Functions</h4>
+<ul>
+<li><code>get_clinpgx_annotation_json()</code></li>
+<li><code>get_filtered_annotations()</code></li>
+</ul>
+<h4 id="responsibilities_3">Responsibilities</h4>
+<ul>
+<li>Query ClinPGx</li>
+<li>Filter annotation results</li>
+<li>Identify relevant allele annotations</li>
+</ul>
+<hr />
+<h3 id="fetch_guidelinespy">fetch_guidelines.py</h3>
+<p>Responsible for retrieving and organising ClinPGx guideline information.</p>
+<h4 id="key-functions_4">Key Functions</h4>
+<ul>
+<li><code>extract_links()</code></li>
+<li><code>get_guideline()</code></li>
+<li><code>build_guideline_catalog()</code></li>
+</ul>
+<h4 id="responsibilities_4">Responsibilities</h4>
+<ul>
+<li>Retrieve guideline annotations</li>
+<li>Extract references and hyperlinks</li>
+<li>Build structured guideline catalogues</li>
+</ul>
+<hr />
+<h2 id="environment-management">Environment Management</h2>
+<p>Star-Allele-Search uses Conda and pip to provide a reproducible development environment.</p>
+<h3 id="create-environment">Create Environment</h3>
+<pre><code class="language-bash">conda env create -f environment.yaml
+conda activate Star-allele-search
+</code></pre>
+<h3 id="install-package">Install Package</h3>
+<pre><code class="language-bash">pip install .
+</code></pre>
+<p>Dependencies are managed using:</p>
+<ul>
+<li>environment.yaml</li>
+<li>requirements.txt</li>
+<li>pyproject.toml</li>
+</ul>
+<hr />
+<h2 id="testing-and-quality-assurance">Testing and Quality Assurance</h2>
+<h3 id="overview">Overview</h3>
+<p>Star-Allele-Search uses automated testing to verify that application functionality behaves as expected and to reduce the risk of introducing regressions during development.</p>
+<p>Testing is performed using <strong>PyTest</strong> and is automatically executed through <strong>GitHub Actions</strong> whenever code is pushed to the repository or submitted in a pull request.</p>
+<hr />
+<h3 id="automated-testing">Automated Testing</h3>
+<p>The automated test suite verifies the behaviour of individual modules and application workflows.</p>
+<p>Tests can be executed locally using:</p>
+<pre><code class="language-bash">pytest
+</code></pre>
+<p><img alt="PyTest Results" src="../images/pytest_passing.png" /></p>
+<p><small><em>Figure 1. Successful execution of the Star-Allele-Search test suite.</em></small></p>
+<hr />
+<h3 id="test-coverage">Test Coverage</h3>
+<p>Coverage analysis is performed using <strong>pytest-cov</strong> to measure how much of the source code is exercised by the automated tests.</p>
+<p>Coverage can be generated using:</p>
+<pre><code class="language-bash">pytest --cov=App --cov-report=term-missing --cov-report=html -vv
+</code></pre>
+<p>The command generates a terminal summary and an HTML coverage report that can be inspected in a web browser.</p>
+<p><img alt="Coverage Results" src="../images/pytest_terminal_output.png" /></p>
+<p><small><em>Figure 2. Coverage generation using pytest-cov.</em></small></p>
+<h4 id="coverage-objectives">Coverage Objectives</h4>
+<p>The test suite is designed to cover:</p>
+<ul>
+<li>PharmVar API integration</li>
+<li>ClinPGx annotation retrieval</li>
+<li>HGNC identifier retrieval</li>
+<li>Guideline processing</li>
+<li>Variant validation</li>
+<li>Exception handling</li>
+<li>Error conditions</li>
+</ul>
+<hr />
+<h3 id="types-of-testing">Types of Testing</h3>
+<h4 id="unit-testing">Unit Testing</h4>
+<p>Unit tests validate individual functions in isolation to ensure that each software component behaves correctly.</p>
+<p>Examples include:</p>
+<ul>
+<li>PharmVar data retrieval functions</li>
+<li>HGNC lookup functions</li>
+<li>Annotation filtering functions</li>
+<li>Guideline catalogue generation</li>
+</ul>
+<h4 id="exception-testing">Exception Testing</h4>
+<p>Exception tests ensure that the software handles invalid data and external service failures appropriately.</p>
+<p>Examples include:</p>
+<ul>
+<li>Invalid allele names</li>
+<li>Network failures</li>
+<li>Missing API credentials
+tinuous Integration</li>
+</ul>
+<p>Star-Allele-Search uses <strong>GitHub Actions</strong> for Continuous Integration (CI).</p>
+<p>Every push and pull request automatically triggers a workflow that:</p>
+<ol>
+<li>Creates a clean Python environment.</li>
+<li>Installs project dependencies.</li>
+<li>Executes the automated test suite.</li>
+<li>Generates code coverage metrics.</li>
+<li>Uploads coverage reports to Codecov.</li>
+</ol>
+<p>This ensures that code changes are automatically validated before being merged into the project.</p>
+<p>../images/github_actions_passing.png</p>
+<p><small><em>Figure 3. Successful GitHub Actions workflow showing automated testing and Codecov integration.</em></small></p>
+<hr />
+<h3 id="quality-assurance-workflow">Quality Assurance Workflow</h3>
+<pre><code class="language-text">Code Change
+      │
+      ▼
+GitHub Push / Pull Request
+      │
+      ▼
+GitHub Actions
+      │
+ ┌────┼────────────┐
+ │    │            │
+ ▼    ▼            ▼
+Install  Run Tests  Generate Coverage
+Dependencies
+      │
+      ▼
+Codecov Upload
+      │
+      ▼
+Pass / Fail Report
+</code></pre>
+<p>The Continuous Integration pipeline helps ensure that all code committed to the repository is automatically tested and validated.</p>
+<hr />
+<h2 id="logging">Logging</h2>
+<p>Logging is used throughout the application to record operational events and errors.</p>
+<p>The following logging levels are used:</p>
+<ul>
+<li>DEBUG</li>
+<li>INFO</li>
+<li>WARNING</li>
+<li>ERROR</li>
+</ul>
+<p>Logging captures:</p>
+<ul>
+<li>API requests</li>
+<li>Processing steps</li>
+<li>Validation failures</li>
+<li>Unexpected exceptions</li>
+</ul>
+<hr />
+<h2 id="exception-handling">Exception Handling</h2>
+<p>The application uses exception handling to ensure failures are reported gracefully.</p>
+<p>Examples include:</p>
+<ul>
+<li>Invalid user input</li>
+<li>Network failures</li>
+<li>API errors</li>
+<li>JSON parsing failures</li>
+<li>Missing API credentials</li>
+</ul>
+<p>Exceptions are logged to aid debugging and maintenance.</p>
+<hr />
+<h2 id="future-improvements">Future Improvements</h2>
+<p>Potential future enhancements include:</p>
+<ul>
+<li>Additional PharmGKB integration</li>
+<li>Expanded phenotype annotations</li>
+<li>Enhanced guideline filtering</li>
+<li>Result export functionality</li>
+<li>Additional pharmacogene support</li>
+<li>Improved search capabilities</li>
+<li>Web application deployment</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
