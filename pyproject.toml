@@ -119,3 +119,8 @@ requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2", "wheel"]
 
 # The tool used to build your package
 build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: integration tests requiring external services"
+]
