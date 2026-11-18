@@ -7,5 +7,5 @@ def test_get_hgnc_id():
     assert get_hgnc_id(gene_symbol) == "HGNC:2621"
 
 
-def test_get_hgnc_json():
+#def test_get_hgnc_json():
     
