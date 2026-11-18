@@ -4,6 +4,9 @@ Prepare ClinPGx results for a requested star allele.
 Organize the results by summary annotation ID. Keep the annotation fields
 needed for display and attach the summaries and full text of the related
 guidelines from fetch_guidelines. Add URL fpr tje full text of guidelines.
+
+Group records with the same complete combination of drugs. Return a
+list of groups, each containing a drug list and its associated findings.
 """
 
 import json
@@ -84,8 +87,48 @@ def build_clinpgx_results(allele:str) -> list[dict[str, object]]:
 
     return output_list
 
+def group_clinpgx_results (allele:str):
+    """
+    Group ClinPGx results by their complete combination of drugs.
+
+    Annotations with the same drug names are collected into one group,
+    regardless of the order of the names. Each annotation is retained
+    as a separate finding within its group.
+
+    Parameters
+    ----------
+    allele : str
+        Star allele to query (e.g. "CYP2C19*2").
+
+    Returns
+    -------
+    list of dict
+        One dictionary per distinct drug combination, containing:
+        - drugs: an alphabetically sorted list of drug names.
+        - findings: a list of the associated annotation dictionaries.
+        Annotations with no drugs are collected in a group with an
+        empty drugs list. Returns an empty list when no annotations exist.
+    """
+    annotations = build_clinpgx_results(allele)
+    groups_by_drugs: Dict[str, object] = {}
+
+    for annotation in annotations:
+        drugs_list = annotation["drugs"]
+        sorted_drugs = sorted(drugs_list)
+        drugs_keys = tuple(sorted_drugs)
+
+        if drugs_keys not in groups_by_drugs:
+            new_group = {}
+            new_group["drugs"] = sorted_drugs
+            new_group["findings"] = []
+            groups_by_drugs[drugs_keys] = new_group
+
+        groups_by_drugs[drugs_keys]["findings"].append(annotation)
+
+    return list(groups_by_drugs.values())
+
 def main():
-    result = build_clinpgx_results("CYP2C19*2")
+    result = group_clinpgx_results("CYP2C19*2")
     print(result)
 
     with open("clinpgx_results.json", "w", encoding="utf-8") as file:
@@ -93,3 +136,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
