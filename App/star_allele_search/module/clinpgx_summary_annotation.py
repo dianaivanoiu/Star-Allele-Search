@@ -1,11 +1,14 @@
 """
-Query ClinPGx clinical annotations by gene
+Query ClinPGx clinical annotations by gene and filter by star allele
 """
 
 import json
 import requests
 import re
 
+###############################################################################
+#      I generated the code myself (Diana), unless specifically stated
+###############################################################################
 
 BASE_URL = "https://api.clinpgx.org/v1/data/summaryAnnotation"
 
@@ -13,10 +16,9 @@ HEADERS = {
     "accept": "application/json",
 }
 
-
 def get_clinpgx_annotation_json(allele):
     """
-    Query ClinPGx and return JSON for the gene the star allele correspond to.
+    Query ClinPGx and return JSON for the gene the star allele corresponds to.
 
     Parameters
     ----------
@@ -48,7 +50,7 @@ def get_clinpgx_annotation_json(allele):
 
     return response.json()
 
-def get_filtered_annotations(allele):
+def get_filtered_annotations(allele) -> dict:
     """
       Filter summary annotations to keep only the ones containing the requested allele
 
@@ -59,8 +61,8 @@ def get_filtered_annotations(allele):
 
       Returns
       -------
-      list
-          Filtered JSON response from get_clinpgx_annotation_json function.
+      dict
+          Dictionary with a "data" key containing the filtered annotation list.
       """
     annotation_data = get_clinpgx_annotation_json(allele)
     allele = allele.strip().upper()
